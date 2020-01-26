@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Juno-Arst
+Comment=GTK themes inspired by epic vscode themes
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Juno-Arst
+MetacityTheme=Juno-Arst
+IconTheme=Papirus-Dark
+ButtonLayout=:minimize,maximize,close
