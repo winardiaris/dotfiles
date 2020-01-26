@@ -1,0 +1,3 @@
+#!/bin/bash
+export P="$1"
+echo $P | md5sum | base64 | head -c64

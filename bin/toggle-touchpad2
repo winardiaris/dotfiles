@@ -1,0 +1,9 @@
+#!/bin/bash
+AKTIF=$(synclient | grep TouchpadOff | grep 1 | wc -l)
+if [ $AKTIF -gt 0 ]; then
+    # "Switch to On"
+    synclient Touchpadoff=0
+else
+    # "Switch to Off"
+    synclient Touchpadoff=1
+fi

@@ -1,0 +1,17 @@
+#!/bin/bash
+export dir="$1"
+
+pwd=$('pwd')
+
+if [ -z $1 ]; then
+  dirname=$pwd
+else
+  if [ -d $dir ]; then
+    dirname=$dir
+  else
+    echo "dirsize cannot access '$dir': No such file or directory"
+    exit
+  fi
+fi
+
+find $dirname -maxdepth 1 -type d -exec du -sh {} \; | sort -hr

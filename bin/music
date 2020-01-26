@@ -1,0 +1,47 @@
+#!/bin/bash
+export OPSI="$1"
+
+AUDACIOUS=$([ $(pgrep audacious) ] && echo 1 || echo 0)
+SPOTIFY=$([ $(pgrep spotify | wc -l) -gt 0 ] && echo 1 || echo 0)
+
+# echo $AUDACIOUS
+# echo $SPOTIFY
+
+if [ $AUDACIOUS -eq 1 ] && [ $SPOTIFY -eq 0 ]; then
+    if [ $OPSI == "--play" ]; then
+        audacious -p
+    elif [ $OPSI == "--playpause" ]; then
+        audacious -t
+        notify-send "Music" "Play/Pause"
+    elif [ $OPSI == "--next" ]; then
+        audacious -f
+    elif [ $OPSI == "--prev" ]; then
+        audacious -r
+    elif [ $OPSI == "--quit" ]; then
+        killall audacious
+    fi
+elif [ $SPOTIFY -eq 1 ] && [ $AUDACIOUS -eq 0 ]; then
+    if [ $OPSI == "--play" ]; then
+        spotify-cli --next
+    elif [ $OPSI == "--playpause" ]; then
+        spotify-cli --playpause
+        notify-send "Music" "Play/Pause"
+    elif [ $OPSI == "--next" ]; then
+        spotify-cli --next
+    elif [ $OPSI == "--prev" ]; then
+        spotify-cli --prev
+    elif [ $OPSI == "--quit" ]; then
+        killall spotify
+    fi
+elif [ $SPOTIFY -eq 0 ] && [ $AUDACIOUS -eq 0 ]; then
+    if [ $OPSI == "--play" ] || [ $OPSI == "--playpause" ] || [ $OPSI == "--next" ] || [ $OPSI == "--prev" ] || [ $OPSI == "--quit" ]; then
+        notify-send "Music" "No music player running. \n Open one Audacious or Spotify"
+    fi
+elif [ $SPOTIFY -eq 1 ] && [ $AUDACIOUS -eq 1 ]; then
+    if [ $OPSI == "--play" ] || [ $OPSI == "--playpause" ] || [ $OPSI == "--next" ] || [ $OPSI == "--prev" ]; then
+        notify-send "Music" "Have too much player running. Close one"
+    elif [ $OPSI == "--quit" ]; then
+        killall audacious
+        killall spotify
+    fi
+fi

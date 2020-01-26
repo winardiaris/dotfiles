@@ -1,0 +1,16 @@
+#!/bin/bash
+
+CURRENT="`setxkbmap -print | grep xkb_symbols | awk '{print $4}' | awk -F"+" '{print $2}'`"
+MECA="`lsusb | grep 05ac:024f | wc -l`"
+
+if [ $MECA -gt 0 ]; then
+    if [ "$CURRENT" == "us" ]; then
+        xmodmap $HOME/bin/mecasportQwerty
+        notify-send  "System Message" "Meca Sport Keyboard layout changed to: ${CURRENT}"
+    else
+        xmodmap $HOME/bin/mecasportColemak
+        notify-send  "System Message" "Meca Sport Keyboard layout changed to: ${CURRENT}"
+    fi
+else
+    notify-send  "System Message" "Meca Sport Keyboard unplugged"
+fi

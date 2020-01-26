@@ -1,0 +1,6 @@
+keycode 66 = Escape
+keycode 108 = Mode_switch
+keycode 33 = semicolon colon Up
+keycode 48 = apostrophe quotedbl Right
+keycode 47 = o O Down
+keycode 46 = i I Left
