@@ -1,5 +1,6 @@
 set $mod Mod4
-set $thick 2
+set $thick 1
+set $none 0
 
 new_window pixel $thick
 new_float pixel $thick
@@ -10,7 +11,7 @@ bindsym $mod+u border none
 bindsym $mod+y border pixel $thick
 bindsym $mod+n border normal
 
-font xft:Droid\ Sans\ Mono\ Dotted\ for\ Powerline\ Regular 11
+font xft:Droid\ Sans\ Mono\ for\ Powerline\ Regular 11
 
 # FLOATING
 floating_modifier $mod
@@ -22,14 +23,14 @@ bindsym $mod+Return exec urxvt-256color
 bindsym $mod+Shift+backslash kill
 
 # start program launcher
-bindsym $mod+space exec --no-startup-id rofi -show drun -show-icons -drun-icon-theme "Papirus-Dark"
+bindsym $mod+space exec --no-startup-id rofi -show drun -show-icons -drun-icon-theme "Papirus-Adapta-Nokto"
 bindsym $mod+f exec pcmanfm
 bindsym $mod+p exec firefox
 
 # change focus
 bindsym $mod+i focus left
 bindsym $mod+o focus down
-bindsym $mod+semicolon focus up
+bindsym $mod+semicolon focus upz
 bindsym $mod+apostrophe focus right
 
 bindsym $mod+Left focus left
@@ -169,19 +170,22 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec powermenu-alt
+
+# lock
+bindsym $mod+Shift+x exec i3lockc
 
 # Set shut down, restart and locking features
 bindsym $mod+0 mode "$mode_system"
-set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+set $mode_system (l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
-    bindsym s exec --no-startup-id i3exit suspend, mode "default"
-    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
-    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+    bindsym l exec --no-startup-id i3lockc, mode "default"
+    bindsym s exec --no-startup-id systemctl suspend, suspend, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, logout, mode "default"
+    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
 
     # exit system mode: "Enter" or "Escape"
     bindsym Return mode "default"
@@ -215,16 +219,17 @@ mode "resize" {
 # Autostart applications
 # exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 exec --no-startup-id nitrogen --restore; sleep 1;
-exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id mate-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
 exec --no-startup-id tilda
 exec --no-startup-id colemak
-exec --no-startup-id customKeyboard &
-exec --no-startup-id mecasport &
+exec --no-startup-id mecasport
+exec --no-startup-id customKeyboard
+exec_always --no-startup-id nm-applet
 exec_always --no-startup-id ~/.config/polybar/launch.sh &
+exec_always compton -f
 
 # Theme colors
 client.focused #FFCC66 #1F2430 #FFCC66 #FFCC66 #FFCC66
@@ -286,12 +291,6 @@ bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
 bindsym XF86Search exec --no-startup-id toggle-touchpad2
 
 # music control
-# bindsym XF86AudioNext exec mpc -p 6601 next
-# bindsym XF86AudioPrev exec mpc -p 6601 prev
-# bindsym XF86AudioPlay exec mpc -p 6601 toggle
-# bindsym XF86AudioPause exec mpc -p 6601 toggle
-# bindsym XF86AudioStop exec mpc -p 6601 stop
-
 bindsym $mod+Shift+h exec music --next
 bindsym $mod+Shift+d exec music --prev
 bindsym $mod+Shift+j exec music --playpause
