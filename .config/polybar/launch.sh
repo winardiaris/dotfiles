@@ -11,5 +11,3 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 # Launch Polybar
 polybar -c ~/.config/polybar/themes/winardiaris/config.ini winardiaris &
 # polybar -c ~/.config/polybar/themes/nordic/config.ini nordic &
-# polybar -c ~/.config/polybar/config.ini top &
-# polybar -c ~/.config/polybar/config.ini bottom &

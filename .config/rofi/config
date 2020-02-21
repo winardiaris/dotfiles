@@ -1,21 +1,23 @@
 rofi.color-enabled: true
 ! Window: `background`, `border`, `separator`
-rofi.color-window: argb:cc1F2430, #FFCC66, #FFCC66
+rofi.color-window: argb:cc1F2430, #FFCC66, argb:009575cd
 ! State: `bg`, `fg`, `altbg`, `hlbg`, hlfg
-rofi.color-normal: argb:001F2430, #ffffff, argb:001F2430, argb:009575cd, #FFCC66
-rofi.color-active: argb:001F2430, #1F2430, argb:001F2430, argb:009575cd, #ffc000
+rofi.color-normal: argb:001F2430, #ffffff, argb:001F2430, #FFCC66, #000000
+rofi.color-active: argb:001F2430, #ffffff, argb:001F2430, #FFCC66, #000000
 rofi.color-urgent: argb:001F2430, #ff0000, argb:001F2430, argb:001F2430, #ff0000
 rofi.width: 50
 rofi.padding: 10
-rofi.opacity: 80
-rofi.border: 1px
+rofi.opacity: 90
+rofi.border: 1
 rofi.line-margin: 5
+rofi.line-padding: 5
 rofi.lines: 5
 rofi.columns: 2
-rofi.separator-style: none
-rofi.font: Droid\ Sans\ Mono\ Dotted\ for\ Powerline\ Regular 9
-rofi.bw: 4
+rofi.separator-style: solid
+rofi.font: Fira\ Code 9
+rofi.bw: 0
 rofi.eh: 1
 rofi.separator-style: solid
 rofi.hide-scrollbar: true
 rofi.auto-select: false
+rofi.sidebar-mode: true

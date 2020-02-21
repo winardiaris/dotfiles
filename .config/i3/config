@@ -11,7 +11,7 @@ bindsym $mod+u border none
 bindsym $mod+y border pixel $thick
 bindsym $mod+n border normal
 
-font xft:Droid\ Sans\ Mono\ for\ Powerline\ Regular 11
+font xft:Fira\ Code 11
 
 # FLOATING
 floating_modifier $mod
@@ -30,7 +30,7 @@ bindsym $mod+p exec firefox
 # change focus
 bindsym $mod+i focus left
 bindsym $mod+o focus down
-bindsym $mod+semicolon focus upz
+bindsym $mod+semicolon focus up
 bindsym $mod+apostrophe focus right
 
 bindsym $mod+Left focus left
